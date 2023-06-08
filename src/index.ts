@@ -126,7 +126,7 @@ class PgAnonymizer extends Command {
           if (l.startsWith("#")) return null as never; // casting to never, as they're filtered out below
           return {
             col: l.replace(/:(?:.*)$/, "").toLowerCase(),
-            replacement: l.includes(":") ? l.replace(/^(?:.*):/, "") : null
+            replacement: l.includes(":") ? l.replace(/^[^:]+:\s*/, "") : null
           };
         })
         .filter(Boolean);
